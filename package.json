@@ -1,0 +1,22 @@
+{
+  "name": "employee-manager",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "4.x",
+    "express-flash": "0.0.2",
+    "body-parser": "1.x",
+    "co": "4.6.x",
+    "crypto-promise": "1.0.x",
+    "passport": "0.3.x",
+    "passport-http-bearer": "1.0.1",
+    "passport-local": "1.0.0",
+    "cookie-parser": "1.4.3",
+    "cookie-session": "2.0.0-alpha.1",
+    "mongoose": "4.6.0",
+    "mocha": "3.0.2",
+    "jsonwebtoken": "7.1.9",
+    "chai": "3.5.0",
+    "chai-http": "3.0.0",
+    "log4js": "0.6.x"
+  }
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>EmplManager</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body ng-app="mainApp">
+<nav class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">Web app</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <form class="navbar-form navbar-left" method="post" action="/login">
+            <input type="text" class="form-control" placeholder="Login" name="login">
+            <input type="password" class="form-control" placeholder="Password" name="password">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <form class="navbar-form navbar-left" method="post" action="/reg">
+            <input type="text" class="form-control" placeholder="Login" name="login">
+            <input type="password" class="form-control" placeholder="Password" name="password">
+            <button type="submit" class="btn btn-default">Reg</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">{{user.login}}</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.open()">Добавить сотрудника</button>
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td>ФИО</td>
+                    <td>Пол</td>
+                    <td>Контакты</td>
+                    <td>Дата добавления</td>
+                    <td>Рабочий день</td>
+                    <td>Приход/уход</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Иванов Иван Иванович</td>
+                    <td>М</td>
+                    <td>555555</td>
+                    <td>12,12,12</td>
+                    <td>12,12,12</td>
+                    <td>15,00-16,00</td>
+                    <td><button type="button" class="btn btn-default" ng-click="$ctrl.open()">Редактировать</button></td>
+                    <td><button type="button" class="btn btn-default" >Удалить</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">{{$ctrl.items.head}}</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="form-group">
+                    <label for="name">ФИО</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="sex">Пол</label>
+                    <input type="text" class="form-control" id="sex" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="contacts"></label>
+                    <input type="text" class="form-control" id="contacts" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="added">Email</label>
+                    <input type="text" class="form-control" id="added" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="day">Email</label>
+                    <input type="text" class="form-control" id="day" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="start">Email</label>
+                    <input type="text" class="form-control" id="start" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="end">Email</label>
+                    <input type="text" class="form-control" id="end" placeholder="Enter email">
+                </div>
+                <!--<ul>
+                    <li ng-repeat="item in $ctrl.items">
+                        <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>-->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+            </div>
+        </script>
+        <div ng-show="$ctrl.selected">Selection from a modal: {{ $ctrl.selected }}</div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="lib/angular.min.js"></script>
+<script src="lib/angular-route.min.js"></script>
+<script src="lib/bootstrap.min.js"></script>
+<script src="lib/ui-bootstrap-tpls-2.2.0.min.js"></script>
+<script>
+    var mainApp = angular.module("mainApp", ['ui.bootstrap', 'ngRoute']);
+</script>
+<script src="modules/modalWindow.js"></script>
+</body>
+</html>
