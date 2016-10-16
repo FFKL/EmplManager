@@ -2,4 +2,5 @@
 *.iml
 node_modules
 indextest.html
-timeController.js
+timeControllers.js
+smart-table.min.js

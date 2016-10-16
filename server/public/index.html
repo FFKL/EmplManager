@@ -7,10 +7,12 @@
 </head>
 <body ng-app="mainApp">
 <ng-include src="'templates/header.html'"></ng-include>
-<div class="container">
+<div ng-controller="employeesController" class="container">
     <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
         <ng-include src="'templates/table.html'"></ng-include>
         <ng-include src="'templates/modalWindow.html'"></ng-include>
+        <ng-include src="'templates/addTimeWindow.html'"></ng-include>
+        <ng-include src="'templates/changeEmplWindow.html'"></ng-include>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -18,13 +20,16 @@
 <script src="./js/lib/angular-route.min.js"></script>
 <script src="./js/lib/bootstrap.min.js"></script>
 <script src="./js/lib/ui-bootstrap-tpls-2.2.0.min.js"></script>
+<script src="./js/lib/smart-table.min.js"></script>
 <script>
-    var mainApp = angular.module("mainApp", ['ui.bootstrap', 'ngRoute']);
+    var mainApp = angular.module("mainApp", ['ui.bootstrap', 'ngRoute', 'smart-table']);
 </script>
 <script src="./js/modules/modalWindow.js"></script>
 <script src="./js/services/AuthService.js"></script>
+<script src="./js/services/DataService.js"></script>
 <script src="./js/interceptors/tokenInjector.js"></script>
 <script src="./js/controllers/authController.js"></script>
 <script src="./js/controllers/employeeControllers.js"></script>
+<script src="./js/filters.js"></script>
 </body>
 </html>

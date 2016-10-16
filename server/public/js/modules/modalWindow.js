@@ -1,11 +1,58 @@
-mainApp.controller('ModalCtrl', function ($uibModal, $log, $document) {
+mainApp.controller('ModalCtrl', function ($uibModal, $scope, $log, $document, DataService) {
     var $ctrl = this;
-    $ctrl.items = {
-        head: 'Редактировать'
-    };
 
     $ctrl.animationsEnabled = true;
 
+    $ctrl.openEmplWindow = function (employee, size, parentSelector) {
+        var parentElem = parentSelector ?
+            angular.element($document[0].querySelector('.modal ' + parentSelector)) : undefined;
+        var modalInstance = $uibModal.open({
+            animation: $ctrl.animationsEnabled,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'changeEmplWindow.html',
+            controller: 'ModalInstanceCtrl',
+            controllerAs: '$ctrl',
+            size: size,
+            scope: $scope,
+            appendTo: parentElem
+        });
+
+        modalInstance.opened.then(function () {
+            $scope.employee = employee;
+            DataService.setData(employee.id);
+        });
+
+        modalInstance.result.then(function () {
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $ctrl.openTimeWindow = function (id, size, parentSelector) {
+        var parentElem = parentSelector ?
+            angular.element($document[0].querySelector('.modal ' + parentSelector)) : undefined;
+        var modalInstance = $uibModal.open({
+            animation: $ctrl.animationsEnabled,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'addTimeWindow.html',
+            controller: 'ModalInstanceCtrl',
+            controllerAs: '$ctrl',
+            size: size,
+            scope: $scope,
+            appendTo: parentElem
+        });
+
+        modalInstance.opened.then(function () {
+            DataService.setData(id);
+        });
+
+        modalInstance.result.then(function () {
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
     $ctrl.open = function (size, parentSelector) {
         var parentElem = parentSelector ?
             angular.element($document[0].querySelector('.modal ' + parentSelector)) : undefined;
@@ -16,17 +63,13 @@ mainApp.controller('ModalCtrl', function ($uibModal, $log, $document) {
             templateUrl: 'myModalContent.html',
             controller: 'ModalInstanceCtrl',
             controllerAs: '$ctrl',
+            scope: $scope,
             size: size,
-            appendTo: parentElem,
-            resolve: {
-                items: function () {
-                    return $ctrl.items;
-                }
-            }
+            appendTo: parentElem
         });
 
-        modalInstance.result.then(function (selectedItem) {
-            $ctrl.selected = selectedItem;
+        modalInstance.result.then(function () {
+            console.log('sadf');
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });
@@ -37,15 +80,11 @@ mainApp.controller('ModalCtrl', function ($uibModal, $log, $document) {
 // Please note that $uibModalInstance represents a modal window (instance) dependency.
 // It is not the same as the $uibModal service used above.
 
-mainApp.controller('ModalInstanceCtrl', function ($uibModalInstance, items) {
+mainApp.controller('ModalInstanceCtrl', function ($uibModalInstance) {
     var $ctrl = this;
-    $ctrl.items = items;
-    $ctrl.selected = {
-        item: $ctrl.items[0]
-    };
 
     $ctrl.ok = function () {
-        $uibModalInstance.close($ctrl.selected.item);
+        $uibModalInstance.close();
     };
 
     $ctrl.cancel = function () {

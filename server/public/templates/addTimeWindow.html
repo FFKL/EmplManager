@@ -1,0 +1,25 @@
+<script type="text/ng-template" id="addTimeWindow.html">
+    <div class="modal-header">
+        Добавить рабочее время
+    </div>
+    <form name="addTimeForm">
+        <div class="modal-body" id="modal-body">
+            <div class="form-group">
+                <label for="day">День</label>
+                <input type="text" class="form-control" ng-model="time.day" ng-pattern="/^\d{4}-\d{1,2}-\d{1,2}$/" id="day" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="start">Начало рабочего дня</label>
+                <input type="text" class="form-control" ng-model="time.start" id="start" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="end">Окончание рабочего дня</label>
+                <input type="text" class="form-control" ng-model="time.end" id="end" placeholder="Enter email">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="createTime(time); $ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </form>
+</script>

@@ -1,13 +1,11 @@
 <button type="button" class="btn btn-primary" ng-click="$ctrl.open()">Добавить сотрудника</button>
-<div ng-controller="GetOrdersController" class="row">
-    <table class="table table-hover">
-        {{orders}}
+<div class="row">
+    <table st-table="rowCollection" class="table table-hover">
         <thead>
         <tr>
             <td>ФИО</td>
             <td>Пол</td>
             <td>Контакты</td>
-            <td>Дата добавления</td>
             <td>Рабочий день</td>
             <td>Приход/уход</td>
             <td></td>
@@ -16,15 +14,27 @@
         </thead>
         <tbody>
         <tr ng-repeat="empl in empls">
-            <td>{{empl.name}}</td>
-            <td>{{empl.sex}}</td>
+            <td>{{empl.name}} {{empl.surname}} {{empl.patronymic}}</td>
+            <td>{{empl.sex|formatSex}}</td>
             <td>{{empl.contacts}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><button type="button" class="btn btn-default" ng-click="$ctrl.open()">Редактировать</button></td>
-            <td><button type="button" class="btn btn-default" >Удалить</button></td>
+            <td>
+                <p ng-repeat="time in empl.times">{{time.day|formatDay}}</p>
+            </td>
+            <td><button type="button" class="btn btn-default" ng-click="$ctrl.openTimeWindow(empl._id)">Добавить</button>
+                <p ng-repeat="time in empl.times">{{time.start|formatStartEndTime}} - {{time.end|formatStartEndTime}}
+                    <button type="button" class="btn btn-default" ng-click="deleteTime(empl._id, time._id)">У</button>
+                </p>
+            </td>
+            <td><button type="button" class="btn btn-default" ng-click="$ctrl.openEmplWindow(empl)">Редактировать</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="deleteEmployee(empl)" >Удалить</button></td>
         </tr>
         </tbody>
+        <!--<tfoot>
+        <tr>
+            <td colspan="5" class="text-center">
+                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+            </td>
+        </tr>
+        </tfoot>-->
     </table>
 </div>

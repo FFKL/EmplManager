@@ -28,8 +28,11 @@ module.exports = (app, passport) => {
     app.route('/api');
     app.get('/api/empl/', emplController.read);
     app.post('/api/empl/', emplController.create);
-    app.put('/api/empl/:id', emplController.update);
+    app.post('/api/empl/:id/time/', emplController.addTime);
+    app.put('/api/empl/:id', emplController.updateEmpl);
+    app.put('/api/empl/:id/time/:timeId', emplController.updateTime);
     app.delete('/api/empl/:id', emplController.delete);
+    app.delete('/api/empl/:id/time/:timeId', emplController.deleteTime);
 
     app.get('/api/time/', timeController.read);
     app.post('/api/time/', timeController.create);
