@@ -1,4 +1,4 @@
-mainApp.controller('ModalDemoCtrl', function ($uibModal, $log, $document) {
+mainApp.controller('ModalCtrl', function ($uibModal, $log, $document) {
     var $ctrl = this;
     $ctrl.items = {
         head: 'Редактировать'
@@ -8,7 +8,7 @@ mainApp.controller('ModalDemoCtrl', function ($uibModal, $log, $document) {
 
     $ctrl.open = function (size, parentSelector) {
         var parentElem = parentSelector ?
-            angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+            angular.element($document[0].querySelector('.modal ' + parentSelector)) : undefined;
         var modalInstance = $uibModal.open({
             animation: $ctrl.animationsEnabled,
             ariaLabelledBy: 'modal-title',

@@ -1,0 +1,24 @@
+<nav class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">Web app</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div ng-controller="LoginController" >
+            <form class="navbar-form navbar-left">
+                <input type="text" ng-model="data.login" class="form-control" required placeholder="Login">
+                <input type="password" ng-model="data.password" class="form-control" required placeholder="Password">
+                <button ng-click="login(data)" type="button" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+        <div ng-controller="RegController" >
+            <form class="navbar-form navbar-left">
+                <input type="text" ng-model="data.login" class="form-control" required placeholder="Login">
+                <input type="password" ng-model="data.password" class="form-control" required placeholder="Password">
+                <button ng-click="reg(data)" type="button" class="btn btn-default">Reg</button>
+            </form>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">{{user.login}}</a></li>
+        </ul>
+    </div>
+</nav>

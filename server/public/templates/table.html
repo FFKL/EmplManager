@@ -1,0 +1,30 @@
+<button type="button" class="btn btn-primary" ng-click="$ctrl.open()">Добавить сотрудника</button>
+<div ng-controller="GetOrdersController" class="row">
+    <table class="table table-hover">
+        {{orders}}
+        <thead>
+        <tr>
+            <td>ФИО</td>
+            <td>Пол</td>
+            <td>Контакты</td>
+            <td>Дата добавления</td>
+            <td>Рабочий день</td>
+            <td>Приход/уход</td>
+            <td></td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="empl in empls">
+            <td>{{empl.name}}</td>
+            <td>{{empl.sex}}</td>
+            <td>{{empl.contacts}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><button type="button" class="btn btn-default" ng-click="$ctrl.open()">Редактировать</button></td>
+            <td><button type="button" class="btn btn-default" >Удалить</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -4,7 +4,7 @@ module.exports = (mongoose) => {
 
     const Schema = mongoose.Schema;
     const TimeSchema = new Schema({
-        name: String,
+        emplId: String,
         day: String,
         start: String,
         end: String

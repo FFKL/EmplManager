@@ -18,7 +18,7 @@ module.exports = {
 
         }
         let time = new Time({
-            name: req.body.name,
+            emplId: req.body.emplId,
             day: req.body.day,
             start: req.body.start,
             end: req.body.end
@@ -36,7 +36,7 @@ module.exports = {
             if (!time) {
                 res.send(404, {message: 'Not found'})
             }
-            time.name = req.body.name;
+            time.emplId= req.body.emplId;
             time.day =  req.body.day;
             time.start = req.body.start;
             time.end = req.body.end;

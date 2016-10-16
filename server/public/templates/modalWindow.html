@@ -1,0 +1,39 @@
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">{{$ctrl.items.head}}</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="form-group">
+            <label for="name">ФИО</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="sex">Пол</label>
+            <input type="text" class="form-control" id="sex" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="contacts"></label>
+            <input type="text" class="form-control" id="contacts" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="added">Email</label>
+            <input type="text" class="form-control" id="added" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="day">Email</label>
+            <input type="text" class="form-control" id="day" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="start">Email</label>
+            <input type="text" class="form-control" id="start" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="end">Email</label>
+            <input type="text" class="form-control" id="end" placeholder="Enter email">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+    </div>
+</script>

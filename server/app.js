@@ -14,6 +14,8 @@ require('./config/mongoose')(mongoose);
 require('./config/passport')(passport);
 require('./config/routes')(app, passport);
 
+app.use(express.static(__dirname + '/public'));
+
 const server = app.listen(PORT, () => { console.log("Server started on localhost:" + PORT) });
 
 module.exports = server;
