@@ -129,7 +129,7 @@ module.exports = {
                 employee.times.id(req.params.timeId).remove();
                 employee.save((err) => {
                     if (!err) {
-                        res.send({message: 'Employee deleted'})
+                        res.send({message: 'Time deleted'})
                     } else {
                         res.send(500, {message: 'Server error'})
                     }

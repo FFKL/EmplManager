@@ -5,17 +5,17 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <a ng-controller="LogoutController" ng-show="isAuth" ng-click="logout()" class="btn btn-default navbar-btn">Выйти</a>
         <div ng-if="!isAuth" ng-controller="LoginController" >
-            <form class="navbar-form navbar-left">
-                <input type="text" ng-model="data.login" class="form-control" required placeholder="Login">
-                <input type="password" ng-model="data.password" class="form-control" required placeholder="Password">
-                <button ng-click="login(data);" type="button" class="btn btn-default">Submit</button>
+            <form name="loginForm" class="navbar-form navbar-left">
+                <input type="text" ng-model="data.login" class="form-control" name="login" required placeholder="Login">
+                <input type="password" ng-model="data.password" class="form-control" name="password" required placeholder="Password">
+                <button ng-click="login(data);" ng-disabled="loginForm.$invalid" type="button" class="btn btn-default">Submit</button>
             </form>
         </div>
         <div ng-if="!isAuth" ng-controller="RegController" >
-            <form class="navbar-form navbar-left">
-                <input type="text" ng-model="data.login" class="form-control" required placeholder="Login">
-                <input type="password" ng-model="data.password" class="form-control" required placeholder="Password">
-                <button ng-click="reg(data)" type="button" class="btn btn-default">Reg</button>
+            <form name="regForm" class="navbar-form navbar-left">
+                <input type="text" ng-model="data.login" class="form-control" name="login" required placeholder="Login">
+                <input type="password" ng-model="data.password" class="form-control" name="password" required placeholder="Password">
+                <button ng-click="reg(data)" ng-disabled="regForm.$invalid" type="button" class="btn btn-default">Reg</button>
             </form>
         </div>
         <ul ng-if="isAuth" class="nav navbar-nav navbar-right">

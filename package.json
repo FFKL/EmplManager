@@ -1,6 +1,10 @@
 {
   "name": "employee-manager",
   "version": "0.0.1",
+  "scripts": {
+    "start": "node ./server/app.js",
+    "test": "node ./node_modules/mocha/bin/mocha"
+  },
   "dependencies": {
     "express": "4.x",
     "express-flash": "0.0.2",
@@ -16,7 +20,6 @@
     "mocha": "3.0.2",
     "jsonwebtoken": "7.1.9",
     "chai": "3.5.0",
-    "chai-http": "3.0.0",
-    "log4js": "0.6.x"
+    "chai-http": "3.0.0"
   }
 }
