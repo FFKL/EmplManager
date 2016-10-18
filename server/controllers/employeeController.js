@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee');
 
 module.exports = {
-    read(req, res) {
+    read(res) {
         Employee.find((err, employees) => {
             if (!err) {
                 res.send(employees);
@@ -14,7 +14,6 @@ module.exports = {
         })
     },
     create(req, res) {
-        console.log(req.body);
         let employee = new Employee({
             name: req.body.name,
             surname: req.body.surname,
@@ -27,8 +26,7 @@ module.exports = {
                     start: req.body.start,
                     end: req.body.end
                 }
-            ],
-            people: [{emplId: req.body.emplId}]
+            ]
         });
         employee.save((err) => {
             if (!err) {

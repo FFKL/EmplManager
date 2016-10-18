@@ -8,7 +8,7 @@
             <form class="navbar-form navbar-left">
                 <input type="text" ng-model="data.login" class="form-control" required placeholder="Login">
                 <input type="password" ng-model="data.password" class="form-control" required placeholder="Password">
-                <button ng-click="login(data)" type="button" class="btn btn-default">Submit</button>
+                <button ng-click="login(data);" type="button" class="btn btn-default">Submit</button>
             </form>
         </div>
         <div ng-if="!isAuth" ng-controller="RegController" >

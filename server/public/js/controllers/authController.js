@@ -8,6 +8,9 @@ mainApp.controller('LoginController',
                     $rootScope.$broadcast('AuthEvent');
                     $rootScope.user = response;
                 }
+            }).error(function (err) {
+                $scope.data = {};
+                $rootScope.message = err + ' Проверьте правильность ввода логина/пароля';
             })
         };
     }
@@ -15,20 +18,25 @@ mainApp.controller('LoginController',
 
 mainApp.controller('LogoutController', function LogoutController($rootScope, $scope, $http, AuthService) {
     $scope.logout = function() {
-        $http.post('/logout', $rootScope.user).success(function (response) {
+        $http.post('/logout', $rootScope.user).success(function () {
             AuthService.setAuth(false);
             AuthService.setToken({});
             $rootScope.user = {};
+            $rootScope.message = 'Вы разлогинились';
         })
     }
 });
 
 mainApp.controller('RegController',
-    function RegController($scope, $http) {
+    function RegController($scope, $rootScope, $http) {
         $scope.user={};
         $scope.reg = function(data) {
             $http.post('/reg', data).success(function (response) {
-                $scope.user = response;
+                $scope.data = {};
+                $rootScope.message = response.message;
+            }).error(function(err) {
+                $scope.data = {};
+                $rootScope.message = err.error + ' Ошибка регистрации';
             })
         };
     }

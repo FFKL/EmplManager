@@ -1,6 +1,5 @@
 const userController = require('../controllers/userController');
 const emplController = require('../controllers/employeeController');
-const timeController = require('../controllers/timeController');
 const bearerMiddleware = require('./middlewares/bearer');
 
 module.exports = (app, passport) => {
@@ -10,8 +9,6 @@ module.exports = (app, passport) => {
         (req, res) => {
             res.json(req.user)
         });
-
-    app.get('/login', userController.login);
     app.post('/logout', userController.logout);
     app.post('/reg', userController.register);
 
@@ -29,9 +26,4 @@ module.exports = (app, passport) => {
     app.put('/api/empl/:id/time/:timeId', emplController.updateTime);
     app.delete('/api/empl/:id', emplController.delete);
     app.delete('/api/empl/:id/time/:timeId', emplController.deleteTime);
-
-    /*app.get('/api/time/', timeController.read);
-    app.post('/api/time/', timeController.create);
-    app.put('/api/time/:id', timeController.update);
-    app.delete('/api/time/:id', timeController.delete);*/
 };

@@ -6,7 +6,6 @@ const User = mongoose.model('User');
 
 module.exports = new BearerStrategy(
     (token, done) => {
-        console.log(token);
         User.findOne({ token: token }, (err, user) => {
             if (err) { return done(err); }
             if (!user) { return done(null, false); }

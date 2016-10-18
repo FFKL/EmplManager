@@ -3,6 +3,8 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
         $http.get('api/empl/').success(function (response) {
             $scope.empls = response;
             initTable();
+        }).error(function(err) {
+            $rootScope.message = err.message;
         })
     };
     $rootScope.$on('AuthEvent', function() {
@@ -28,33 +30,46 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
 
     $scope.createEmployee = function(employee) {
         var employeeClone = correctAndCloneEmployee(employee);
-        $http.post('api/empl/', employeeClone).success(function(response) {
-                refresh();
-            }
-        )
+        $http.post('api/empl/', employeeClone).success(function() {
+            $rootScope.message = 'Сотрудник добавлен';
+            refresh();
+        }).error(function (err) {
+            $rootScope.message = err.message;
+        })
     };
 
     $scope.createTime = function(time) {
         var timeClone = correctAndCloneTime(time);
-        $http.post('api/empl/' + DataService.getData() + '/time/', timeClone).success(function(response) {
-                refresh();
-            }
-        )
+        $http.post('api/empl/' + DataService.getData() + '/time/', timeClone).success(function() {
+            $rootScope.message = 'Рабочее время добавлено';
+            refresh();
+        }).error(function (err) {
+            $rootScope.message = err.message;
+        })
     };
     $scope.changeEmployee = function(data) {
         data.sex = data.sex === 'м';
-        $http.put('/api/empl/' + data._id, data).success(function(response) {
-            refresh()
+        $http.put('/api/empl/' + data._id, data).success(function() {
+            $rootScope.message = 'Данные о сотруднике изменены';
+            refresh();
+        }).error(function (err) {
+            $rootScope.message = err.message;
         })
     };
     $scope.deleteEmployee = function(data) {
-        $http.delete('api/empl/' + data._id).success(function(response) {
+        $http.delete('api/empl/' + data._id).success(function() {
+            $rootScope.message = 'Сотрудник удален';
             refresh();
+        }).error(function (err) {
+            $rootScope.message = err.message;
         })
     };
     $scope.deleteTime = function(id, timeId) {
-        $http.delete('api/empl/' + id + '/time/' + timeId).success(function(response) {
+        $http.delete('api/empl/' + id + '/time/' + timeId).success(function() {
+            $rootScope.message = 'Рабочее время удалено';
             refresh();
+        }).error(function (err) {
+            $rootScope.message = err.message;
         })
     };
 

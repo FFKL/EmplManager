@@ -7,6 +7,7 @@
 </head>
 <body ng-app="mainApp">
 <ng-include src="'templates/header.html'"></ng-include>
+<div ng-show="message" class="alert alert-info">{{message}}</div>
 <div ng-controller="employeesController" class="container">
     <div ng-if="isAuth" ng-controller="ModalController as $ctrl">
         <ng-include src="'templates/addWindow.html'"></ng-include>
