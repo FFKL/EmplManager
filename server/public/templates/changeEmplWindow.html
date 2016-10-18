@@ -2,30 +2,37 @@
     <div class="modal-header">
         Изменение
     </div>
-    <div class="modal-body" id="modal-body">
-        <div class="form-group">
-            <label for="name">Имя</label>
-            <input type="text" class="form-control" ng-model="employee.name" id="name" placeholder="Enter email">
+    <form name="changeEmplForm">
+        <div class="modal-body" id="modal-body">
+            <div class="form-group">
+                <label for="name">Имя</label>
+                <input type="text" class="form-control" ng-model="employeeClone.name" name="name" id="name" required>
+                <p class="help-block" ng-show="changeEmplForm.name.$invalid">Введите имя</p>
+            </div>
+            <div class="form-group">
+                <label for="surname">Фамилия</label>
+                <input type="text" class="form-control" ng-model="employeeClone.surname" name="surname" id="surname" required>
+                <p class="help-block" ng-show="changeEmplForm.surname.$invalid">Введите фамилию</p>
+            </div>
+            <div class="form-group">
+                <label for="patronymic">Отчество</label>
+                <input type="text" class="form-control" ng-model="employeeClone.patronymic" name="patronymic" id="patronymic" required>
+                <p class="help-block" ng-show="changeEmplForm.patronymic.$invalid">Введите отчество</p>
+            </div>
+            <div class="form-group">
+                <label for="sex">Пол</label>
+                <input type="text" ng-pattern="/^(м|ж)$/" class="form-control" ng-model="employeeClone.sex" name="sex" id="sex" required>
+                <p class="help-block" ng-show="changeEmplForm.sex.$invalid">Введите пол (М/Ж)</p>
+            </div>
+            <div class="form-group">
+                <label for="contacts">Контакты</label>
+                <input type="text" class="form-control" ng-model="employeeClone.contacts" name="contacts" id="contacts" required>
+                <p class="help-block" ng-show="changeEmplForm.contacts.$invalid">Введите контактные данные</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-disabled="changeEmplForm.$invalid" ng-click="changeEmployee(employeeClone); $ctrl.ok()">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="surname">Фамилия</label>
-            <input type="text" class="form-control" ng-model="employee.surname" id="surname" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="patronymic">Отчество</label>
-            <input type="text" class="form-control" ng-model="employee.patronymic" id="patronymic" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="sex">Пол</label>
-            <input type="text" class="form-control" ng-model="employee.sex" id="sex" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="contacts">Контакты</label>
-            <input type="text" class="form-control" ng-model="employee.contacts" id="contacts" placeholder="Enter email">
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="changeEmployee(employee); $ctrl.ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-        </div>
-    </div>
+    </form>
 </script>

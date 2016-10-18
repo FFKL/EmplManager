@@ -1,11 +1,9 @@
-mainApp.controller('ModalCtrl', function ($uibModal, $scope, $log, $document, DataService) {
+mainApp.controller('ModalController', function ($uibModal, $scope, DataService) {
     var $ctrl = this;
 
     $ctrl.animationsEnabled = true;
 
-    $ctrl.openEmplWindow = function (employee, size, parentSelector) {
-        var parentElem = parentSelector ?
-            angular.element($document[0].querySelector('.modal ' + parentSelector)) : undefined;
+    $ctrl.openEmplWindow = function (employee) {
         var modalInstance = $uibModal.open({
             animation: $ctrl.animationsEnabled,
             ariaLabelledBy: 'modal-title',
@@ -13,25 +11,23 @@ mainApp.controller('ModalCtrl', function ($uibModal, $scope, $log, $document, Da
             templateUrl: 'changeEmplWindow.html',
             controller: 'ModalInstanceCtrl',
             controllerAs: '$ctrl',
-            size: size,
-            scope: $scope,
-            appendTo: parentElem
+            scope: $scope
         });
 
         modalInstance.opened.then(function () {
-            $scope.employee = employee;
+            $scope.employeeClone = {
+                _id: employee._id,
+                name: employee.name,
+                surname: employee.surname,
+                patronymic: employee.patronymic,
+                sex: employee.sex ? 'м' : 'ж',
+                contacts: employee.contacts
+            };
             DataService.setData(employee.id);
-        });
-
-        modalInstance.result.then(function () {
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
         });
     };
 
-    $ctrl.openTimeWindow = function (id, size, parentSelector) {
-        var parentElem = parentSelector ?
-            angular.element($document[0].querySelector('.modal ' + parentSelector)) : undefined;
+    $ctrl.openTimeWindow = function (id) {
         var modalInstance = $uibModal.open({
             animation: $ctrl.animationsEnabled,
             ariaLabelledBy: 'modal-title',
@@ -39,45 +35,26 @@ mainApp.controller('ModalCtrl', function ($uibModal, $scope, $log, $document, Da
             templateUrl: 'addTimeWindow.html',
             controller: 'ModalInstanceCtrl',
             controllerAs: '$ctrl',
-            size: size,
-            scope: $scope,
-            appendTo: parentElem
+            scope: $scope
         });
 
         modalInstance.opened.then(function () {
             DataService.setData(id);
         });
-
-        modalInstance.result.then(function () {
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
     };
-    $ctrl.open = function (size, parentSelector) {
-        var parentElem = parentSelector ?
-            angular.element($document[0].querySelector('.modal ' + parentSelector)) : undefined;
-        var modalInstance = $uibModal.open({
+    $ctrl.openAddWindow = function () {
+        $uibModal.open({
             animation: $ctrl.animationsEnabled,
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
-            templateUrl: 'myModalContent.html',
+            templateUrl: 'addWindow.html',
             controller: 'ModalInstanceCtrl',
             controllerAs: '$ctrl',
-            scope: $scope,
-            size: size,
-            appendTo: parentElem
-        });
-
-        modalInstance.result.then(function () {
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
+            scope: $scope
         });
     };
 
 });
-
-// Please note that $uibModalInstance represents a modal window (instance) dependency.
-// It is not the same as the $uibModal service used above.
 
 mainApp.controller('ModalInstanceCtrl', function ($uibModalInstance) {
     var $ctrl = this;

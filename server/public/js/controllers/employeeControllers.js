@@ -1,7 +1,7 @@
 mainApp.controller('employeesController', function($rootScope, $scope, $http, AuthService, DataService) {
     var refresh = function() {
         $http.get('api/empl/').success(function (response) {
-            $scope.emplss = response;
+            $scope.allEmpls = response;
             $scope.getPage(0);
             initTable();
         })
@@ -13,44 +13,26 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
     });
     function initTable() {
         $scope.currentPage = 0;
-        $scope.pageSize = 2;
+        $scope.pageSize = 4;
         $scope.numberOfPages = function(){
-            return Math.ceil($scope.emplss.length / $scope.pageSize);
+            return Math.ceil($scope.allEmpls.length / $scope.pageSize);
         };
     }
     $scope.getPage = function (start) {
-        $scope.empls = $scope.emplss.slice(start)
+        $scope.empls = $scope.allEmpls.slice(start)
     };
 
     $scope.createEmployee = function(employee) {
-        employee.start.setDate(employee.day.getDate());
-        employee.start.setFullYear(employee.day.getFullYear());
-        employee.start.setMonth(employee.day.getMonth());
-        employee.end.setDate(employee.day.getDate());
-        employee.end.setFullYear(employee.day.getFullYear());
-        employee.end.setMonth(employee.day.getMonth());
-        var newEmpl = {
-            name: employee.name,
-            surname: employee.surname,
-            patronymic: employee.patronymic,
-            sex: employee.sex,
-            contacts: employee.contacts,
-            day: employee.day.getTime(),
-            start: employee.start.getTime(),
-            end: employee.end.getTime()
-        };
-        $http.post('api/empl/', newEmpl).success(function(response) {
+        var employeeClone = correctAndCloneEmployee(employee);
+        $http.post('api/empl/', employeeClone).success(function(response) {
                 refresh();
             }
         )
     };
+
     $scope.createTime = function(time) {
-        time.day = new Date(day[2], (day[1] - 1), day[0]).getTime();
-        var start = time.start.split(':');
-        time.start = new Date(day[2], (day[1] - 1), day[0], start[0], start[1]).getTime();
-        var end = time.end.split(':');
-        time.end = new Date(day[2], (day[1] - 1), day[0], end[0], end[1]).getTime();
-        $http.post('api/empl/' + DataService.getData() + '/time/', time).success(function(response) {
+        var timeClone = correctAndCloneTime(time);
+        $http.post('api/empl/' + DataService.getData() + '/time/', timeClone).success(function(response) {
                 refresh();
             }
         )
@@ -69,5 +51,39 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
         $http.delete('api/empl/' + id + '/time/' + timeId).success(function(response) {
             refresh();
         })
+    };
+
+    function correctAndCloneEmployee(employee) {
+        employee.start.setDate(employee.day.getDate());
+        employee.start.setFullYear(employee.day.getFullYear());
+        employee.start.setMonth(employee.day.getMonth());
+        employee.end.setDate(employee.day.getDate());
+        employee.end.setFullYear(employee.day.getFullYear());
+        employee.end.setMonth(employee.day.getMonth());
+        return {
+            name: employee.name,
+            surname: employee.surname,
+            patronymic: employee.patronymic,
+            sex: employee.sex === 'м',
+            contacts: employee.contacts,
+            day: employee.day.getTime(),
+            start: employee.start.getTime(),
+            end: employee.end.getTime()
+        };
+    }
+
+    function correctAndCloneTime(time) {
+        time.start.setDate(time.day.getDate());
+        time.start.setFullYear(time.day.getFullYear());
+        time.start.setMonth(time.day.getMonth());
+        time.end.setDate(time.day.getDate());
+        time.end.setFullYear(time.day.getFullYear());
+        time.end.setMonth(time.day.getMonth());
+        console.log(time.end);
+        return {
+            day: time.day.getTime(),
+            start: time.start.getTime(),
+            end: time.end.getTime()
+        };
     }
 });

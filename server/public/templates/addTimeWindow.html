@@ -6,19 +6,22 @@
         <div class="modal-body" id="modal-body">
             <div class="form-group">
                 <label for="day">День</label>
-                <input type="text" class="form-control" ng-model="time.day" ng-pattern="/^\d{4}-\d{1,2}-\d{1,2}$/" id="day" placeholder="Enter email">
+                <input type="date" class="form-control" ng-model="time.day" name="day" id="day"  required>
+                <p class="help-block" ng-show="addTimeForm.day.$invalid">Введите рабочий день</p>
             </div>
             <div class="form-group">
                 <label for="start">Начало рабочего дня</label>
-                <input type="text" class="form-control" ng-model="time.start" id="start" placeholder="Enter email">
+                <input type="time" class="form-control" ng-model="time.start" name="start" id="start" required>
+                <p class="help-block" ng-show="addTimeForm.start.$invalid">Введите время начала дня</p>
             </div>
             <div class="form-group">
                 <label for="end">Окончание рабочего дня</label>
-                <input type="text" class="form-control" ng-model="time.end" id="end" placeholder="Enter email">
+                <input type="time" class="form-control" ng-model="time.end" name="end" id="end" required>
+                <p class="help-block" ng-show="addTimeForm.end.$invalid">Введите время окончания дня</p>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="createTime(time); $ctrl.ok()">OK</button>
+            <button class="btn btn-primary" type="button" ng-disabled="addTimeForm.$invalid" ng-click="createTime(time); $ctrl.ok()">OK</button>
             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
         </div>
     </form>

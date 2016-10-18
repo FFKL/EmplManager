@@ -8,23 +8,19 @@
 <body ng-app="mainApp">
 <ng-include src="'templates/header.html'"></ng-include>
 <div ng-controller="employeesController" class="container">
-    <div ng-if="isAuth" ng-controller="ModalCtrl as $ctrl" class="modal-demo">
-        <!--<script type="text/ng-template" id="myModalContent.html"></script>-->
-        <!--<div table></div>-->
-        <ng-include src="'templates/modalWindow.html'"></ng-include>
+    <div ng-if="isAuth" ng-controller="ModalController as $ctrl">
+        <ng-include src="'templates/addWindow.html'"></ng-include>
         <ng-include src="'templates/addTimeWindow.html'"></ng-include>
         <ng-include src="'templates/changeEmplWindow.html'"></ng-include>
         <ng-include src="'templates/table.html'"></ng-include>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="./js/lib/jquery.min.js"></script>
 <script src="./js/lib/angular.min.js"></script>
-<script src="./js/lib/angular-route.min.js"></script>
 <script src="./js/lib/bootstrap.min.js"></script>
 <script src="./js/lib/ui-bootstrap-tpls-2.2.0.min.js"></script>
-<script src="./js/lib/smart-table.min.js"></script>
 <script>
-    var mainApp = angular.module("mainApp", ['ui.bootstrap', 'ngRoute', 'smart-table']);
+    var mainApp = angular.module("mainApp", ['ui.bootstrap']);
 </script>
 <script src="./js/modules/modalWindow.js"></script>
 <script src="./js/services/AuthService.js"></script>

@@ -1,6 +1,3 @@
 .idea
 *.iml
 node_modules
-indextest.html
-timeControllers.js
-smart-table.min.js
