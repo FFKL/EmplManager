@@ -2,6 +2,7 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
     var refresh = function() {
         $http.get('api/empl/').success(function (response) {
             $scope.empls = response;
+            $scope.empls.length === 0 ? $scope.isEmpls = false : $scope.isEmpls = true;
             initTable();
         }).error(function(err) {
             $rootScope.message = err.message;

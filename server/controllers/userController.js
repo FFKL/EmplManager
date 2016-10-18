@@ -6,6 +6,9 @@ const crypto = require('crypto-promise');
 const co = require('co');
 
 module.exports = {
+    login(req, res) {
+        res.json(req.user)
+    },
     logout(req, res) {
         User.findOne(req.user, (err, user) => {
             user['token'] = null;

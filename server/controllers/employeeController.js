@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Employee = mongoose.model('Employee');
 
 module.exports = {
-    read(res) {
+    read(req, res) {
         Employee.find((err, employees) => {
             if (!err) {
                 res.send(employees);

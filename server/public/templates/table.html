@@ -1,11 +1,11 @@
 <div class="form-inline">
     <button type="button" class="btn btn-primary" ng-click="$ctrl.openAddWindow()">Добавить сотрудника</button>
-    <div class="input-group">
+    <div ng-show="isEmpls" class="input-group">
         <span class="input-group-addon">Поиск</span>
         <input type="text" class="form-control" ng-model="search">
     </div>
 </div>
-<div class="row">
+<div ng-show="isEmpls" class="row">
     <table class="table table-hover table-condensed">
         <thead>
         <tr>

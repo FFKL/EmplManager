@@ -4,11 +4,7 @@ const bearerMiddleware = require('./middlewares/bearer');
 
 module.exports = (app, passport) => {
 
-    app.post('/login',
-        passport.authenticate('local'),
-        (req, res) => {
-            res.json(req.user)
-        });
+    app.post('/login', passport.authenticate('local'), userController.login);
     app.post('/logout', userController.logout);
     app.post('/reg', userController.register);
 
