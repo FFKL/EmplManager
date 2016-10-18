@@ -1,4 +1,10 @@
-<button type="button" class="btn btn-primary" ng-click="$ctrl.openAddWindow()">Добавить сотрудника</button>
+<div class="form-inline">
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.openAddWindow()">Добавить сотрудника</button>
+    <div class="input-group">
+        <span class="input-group-addon">Поиск</span>
+        <input type="text" class="form-control" ng-model="search">
+    </div>
+</div>
 <div class="row">
     <table st-table="rowCollection" class="table table-hover table-condensed">
         <thead>
@@ -12,9 +18,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="empl in empls | limitTo:pageSize">
+        <tr ng-repeat="empl in empls | filter: search | startFrom: currentPage*pageSize | limitTo: pageSize">
             <td>{{empl.name}} {{empl.surname}} {{empl.patronymic}}</td>
-            <td>{{empl.sex|formatSex}}</td>
+            <td>{{empl.sex}}</td>
             <td>{{empl.contacts}}</td>
             <td>
                 <button type="button" class="btn btn-default" ng-click="$ctrl.openTimeWindow(empl._id)">Добавить</button>
@@ -27,9 +33,9 @@
         </tr>
         </tbody>
     </table>
-    <ul class="pager"><button type="button" class="btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1; getPage(currentPage*pageSize)">Назад</button>
+    <ul class="pager"><button type="button" class="btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Назад</button>
         {{currentPage + 1}}/{{numberOfPages()}}
-        <button type="button" class="btn btn-default" ng-disabled="currentPage >= emplss.length/pageSize - 1" ng-click="currentPage=currentPage+1; getPage(currentPage*pageSize)">Вперед</button>
+        <button type="button" class="btn btn-default" ng-disabled="currentPage >= empls.length/pageSize - 1" ng-click="currentPage=currentPage+1">Вперед</button>
     </ul>
 
 </div>

@@ -1,8 +1,7 @@
 mainApp.controller('employeesController', function($rootScope, $scope, $http, AuthService, DataService) {
     var refresh = function() {
         $http.get('api/empl/').success(function (response) {
-            $scope.allEmpls = response;
-            $scope.getPage(0);
+            $scope.empls = response;
             initTable();
         })
     };
@@ -12,15 +11,20 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
         }
     });
     function initTable() {
+        $scope.empls.forEach(function (empl) {
+            empl.sex = empl.sex ? 'м' : 'ж';
+            empl.times.forEach(function (time) {
+                time.day = new Date(time.day);
+                time.start = new Date(time.start);
+                time.end = new Date(time.end);
+            })
+        });
         $scope.currentPage = 0;
         $scope.pageSize = 4;
         $scope.numberOfPages = function(){
-            return Math.ceil($scope.allEmpls.length / $scope.pageSize);
+            return Math.ceil($scope.empls.length / $scope.pageSize);
         };
     }
-    $scope.getPage = function (start) {
-        $scope.empls = $scope.allEmpls.slice(start)
-    };
 
     $scope.createEmployee = function(employee) {
         var employeeClone = correctAndCloneEmployee(employee);
@@ -38,6 +42,7 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
         )
     };
     $scope.changeEmployee = function(data) {
+        data.sex = data.sex === 'м';
         $http.put('/api/empl/' + data._id, data).success(function(response) {
             refresh()
         })
@@ -79,7 +84,6 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
         time.end.setDate(time.day.getDate());
         time.end.setFullYear(time.day.getFullYear());
         time.end.setMonth(time.day.getMonth());
-        console.log(time.end);
         return {
             day: time.day.getTime(),
             start: time.start.getTime(),
