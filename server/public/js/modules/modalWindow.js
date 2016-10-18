@@ -69,7 +69,6 @@ mainApp.controller('ModalCtrl', function ($uibModal, $scope, $log, $document, Da
         });
 
         modalInstance.result.then(function () {
-            console.log('sadf');
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });

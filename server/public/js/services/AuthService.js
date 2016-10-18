@@ -1,16 +1,15 @@
 mainApp.service('AuthService',
-    function()  {
+    function($rootScope)  {
         var auth = false;
         var authToken = {};
         function isAuth() {
-            console.log(auth)
             return auth;
         }
         function setAuth(state) {
+            $rootScope.isAuth = state;
             auth = state;
         }
         function setToken(token) {
-            console.log(token);
             authToken = token;
         }
         function getToken() {

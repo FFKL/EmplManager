@@ -1,40 +1,35 @@
 <button type="button" class="btn btn-primary" ng-click="$ctrl.open()">Добавить сотрудника</button>
 <div class="row">
-    <table st-table="rowCollection" class="table table-hover">
+    <table st-table="rowCollection" class="table table-hover table-condensed">
         <thead>
         <tr>
             <td>ФИО</td>
             <td>Пол</td>
             <td>Контакты</td>
-            <td>Рабочий день</td>
-            <td>Приход/уход</td>
+            <td>Рабочий день/Приход/уход</td>
             <td></td>
             <td></td>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="empl in empls">
+        <tr ng-repeat="empl in empls | limitTo:pageSize">
             <td>{{empl.name}} {{empl.surname}} {{empl.patronymic}}</td>
             <td>{{empl.sex|formatSex}}</td>
             <td>{{empl.contacts}}</td>
             <td>
-                <p ng-repeat="time in empl.times">{{time.day|formatDay}}</p>
-            </td>
-            <td><button type="button" class="btn btn-default" ng-click="$ctrl.openTimeWindow(empl._id)">Добавить</button>
-                <p ng-repeat="time in empl.times">{{time.start|formatStartEndTime}} - {{time.end|formatStartEndTime}}
-                    <button type="button" class="btn btn-default" ng-click="deleteTime(empl._id, time._id)">У</button>
+                <button type="button" class="btn btn-default" ng-click="$ctrl.openTimeWindow(empl._id)">Добавить</button>
+                <p ng-repeat="time in empl.times">{{time.day|formatDay}} / {{time.start|formatStartEndTime}} / {{time.end|formatStartEndTime}}
+                <button type="button" class="btn btn-default" ng-click="deleteTime(empl._id, time._id)">У</button>
                 </p>
             </td>
             <td><button type="button" class="btn btn-default" ng-click="$ctrl.openEmplWindow(empl)">Редактировать</button></td>
             <td><button type="button" class="btn btn-default" ng-click="deleteEmployee(empl)" >Удалить</button></td>
         </tr>
         </tbody>
-        <!--<tfoot>
-        <tr>
-            <td colspan="5" class="text-center">
-                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
-            </td>
-        </tr>
-        </tfoot>-->
     </table>
+    <ul class="pager"><button type="button" class="btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1; getPage(currentPage*pageSize)">Назад</button>
+        {{currentPage + 1}}/{{numberOfPages()}}
+        <button type="button" class="btn btn-default" ng-disabled="currentPage >= emplss.length/pageSize - 1" ng-click="currentPage=currentPage+1; getPage(currentPage*pageSize)">Вперед</button>
+    </ul>
+
 </div>

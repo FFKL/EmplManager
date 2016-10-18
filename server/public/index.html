@@ -8,11 +8,13 @@
 <body ng-app="mainApp">
 <ng-include src="'templates/header.html'"></ng-include>
 <div ng-controller="employeesController" class="container">
-    <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
-        <ng-include src="'templates/table.html'"></ng-include>
+    <div ng-if="isAuth" ng-controller="ModalCtrl as $ctrl" class="modal-demo">
+        <!--<script type="text/ng-template" id="myModalContent.html"></script>-->
+        <!--<div table></div>-->
         <ng-include src="'templates/modalWindow.html'"></ng-include>
         <ng-include src="'templates/addTimeWindow.html'"></ng-include>
         <ng-include src="'templates/changeEmplWindow.html'"></ng-include>
+        <ng-include src="'templates/table.html'"></ng-include>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

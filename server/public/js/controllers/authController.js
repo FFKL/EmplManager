@@ -1,18 +1,27 @@
 mainApp.controller('LoginController',
     function LoginController($rootScope, $scope, $http, AuthService) {
-        $scope.user={};
         $scope.login = function(data) {
             $http.post('/login', data).success(function (response) {
                 if (response.token) {
                     AuthService.setAuth(true);
                     AuthService.setToken(response.token);
                     $rootScope.$broadcast('AuthEvent');
+                    $rootScope.user = response;
                 }
-                $scope.user = response;
             })
         };
     }
 );
+
+mainApp.controller('LogoutController', function LogoutController($rootScope, $scope, $http, AuthService) {
+    $scope.logout = function() {
+        $http.post('/logout', $rootScope.user).success(function (response) {
+            AuthService.setAuth(false);
+            AuthService.setToken({});
+            $rootScope.user = {};
+        })
+    }
+});
 
 mainApp.controller('RegController',
     function RegController($scope, $http) {

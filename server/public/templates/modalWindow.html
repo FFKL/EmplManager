@@ -2,42 +2,54 @@
     <div class="modal-header">
         Добавление
     </div>
-    <div class="modal-body" id="modal-body">
-        <div class="form-group">
-            <label for="name">Имя</label>
-            <input type="text" class="form-control" ng-model="employee.name" id="name" placeholder="Enter email">
+    <form name="addEmplForm">
+        <div class="modal-body" id="modal-body">
+            <div class="form-group">
+                <label for="name">Имя</label>
+                <input type="text" class="form-control" ng-model="employee.name" name="name" id="name" required>
+                <p class="help-block" ng-show="addEmplForm.name.$invalid">Введите имя</p>
+            </div>
+            <div class="form-group">
+                <label for="surname">Фамилия</label>
+                <input type="text" class="form-control" ng-model="employee.surname" name="surname" id="surname" required>
+                <p class="help-block" ng-show="addEmplForm.surname.$invalid">Введите фамилию</p>
+            </div>
+            <div class="form-group">
+                <label for="patronymic">Отчество</label>
+                <input type="text" class="form-control" ng-model="employee.patronymic" name="patronymic" id="patronymic" required>
+                <p class="help-block" ng-show="addEmplForm.patronymic.$invalid">Введите отчество</p>
+            </div>
+            <div class="form-group">
+                <label for="sex">Пол</label>
+                <input type="text" ng-pattern="/^(м|ж)$/" class="form-control" ng-model="employee.sex" name="sex" id="sex" required>
+                <p class="help-block" ng-show="addEmplForm.sex.$invalid">Введите пол (М/Ж)</p>
+            </div>
+            <div class="form-group">
+                <label for="contacts">Контактыl</label>
+                <input type="text" class="form-control" ng-model="employee.contacts" name="contacts" id="contacts" required>
+                <p class="help-block" ng-show="addEmplForm.contacts.$invalid">Введите контактные данные</p>
+            </div>
+            <div class="form-group">
+                <label for="day">День</label>
+                <input type="date" class="form-control" ng-model="employee.day" name="day" id="day" required>
+                <p class="help-block" ng-show="addEmplForm.day.$invalid">Введите дату</p>
+            </div>
+
+            <!--/^\d{4}-\d{1,2}-\d{1,2}$/-->
+            <div class="form-group">
+                <label for="start">Начало рабочего дня</label>
+                <input type="time" class="form-control" ng-model="employee.start" name="start" id="start" required>
+                <p class="help-block" ng-show="addEmplForm.start.$invalid">Введите время начала дня</p>
+            </div>
+            <div class="form-group">
+                <label for="end">Окончание рабочего дня</label>
+                <input type="time" class="form-control" ng-model="employee.end" name="end" id="end" required>
+                <p class="help-block" ng-show="addEmplForm.end.$invalid">Введите время окончания дня</p>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="surname">Фамилия</label>
-            <input type="text" class="form-control" ng-model="employee.surname" id="surname" placeholder="Enter email">
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-disabled="addEmplForm.$invalid" ng-click="$ctrl.ok(); createEmployee(employee); ">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
         </div>
-        <div class="form-group">
-            <label for="patronymic">Отчество</label>
-            <input type="text" class="form-control" ng-model="employee.patronymic" id="patronymic" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="sex">Пол</label>
-            <input type="text" class="form-control" ng-model="employee.sex" id="sex" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="contacts">Контактыl</label>
-            <input type="text" class="form-control" ng-model="employee.contacts" id="contacts" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="day">День</label>
-            <input type="text" class="form-control" ng-model="empl.day" id="day" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="start">Начало рабочего дня</label>
-            <input type="text" class="form-control" ng-model="employee.start" id="start" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="end">Окончание рабочего дня</label>
-            <input type="text" class="form-control" ng-model="employee.end" id="end" placeholder="Enter email">
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="createEmployee(employee); $ctrl.ok()">OK</button>
-        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-    </div>
+    </form>
 </script>
