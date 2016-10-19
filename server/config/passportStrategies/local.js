@@ -13,10 +13,11 @@ module.exports = new LocalStrategy( {
     },
     (login, password, done) => {
         co(function* () {
+                let salt = 'secretsalt';
                 let user = yield User.findOne({login: login}).exec();
                 if (!user)
                     return done(null, false, { message: 'Incorrect login.' });
-                let hash = yield crypto.hash('md5')(password);
+                let hash = yield crypto.hash('md5')(password + salt);
                 if (hash.toString('hex') !== user.hash)
                     return done(null, false, { message: 'Incorrect password.' });
                 user['token'] = jwt.sign({id: user.id}, 'itissecret');
