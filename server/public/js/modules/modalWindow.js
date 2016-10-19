@@ -20,7 +20,7 @@ mainApp.controller('ModalController', function ($uibModal, $scope, DataService) 
                 name: employee.name,
                 surname: employee.surname,
                 patronymic: employee.patronymic,
-                sex: employee.sex ? 'м' : 'ж',
+                sex: employee.sex,
                 contacts: employee.contacts
             };
             DataService.setData(employee.id);
@@ -33,6 +33,21 @@ mainApp.controller('ModalController', function ($uibModal, $scope, DataService) 
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'addTimeWindow.html',
+            controller: 'ModalInstanceCtrl',
+            controllerAs: '$ctrl',
+            scope: $scope
+        });
+
+        modalInstance.opened.then(function () {
+            DataService.setData(id);
+        });
+    };
+    $ctrl.openSubjWindow = function (id) {
+        var modalInstance = $uibModal.open({
+            animation: $ctrl.animationsEnabled,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'addSubjWindow.html',
             controller: 'ModalInstanceCtrl',
             controllerAs: '$ctrl',
             scope: $scope

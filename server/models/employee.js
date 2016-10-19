@@ -17,7 +17,12 @@ module.exports = (mongoose) => {
                 end: Number
             }
         ],
-        people: [{emplId: String}]
+        subjects: [
+            {
+                subjId: String,
+                surname: String
+            }
+        ]
 
     }, {
         versionKey: false

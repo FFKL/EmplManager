@@ -22,6 +22,14 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
                 time.end = new Date(time.end);
             })
         });
+        var subjectList = [];
+        $scope.empls.forEach(function(empl) {
+            subjectList.push({
+                subjId: empl._id,
+                surname: empl.surname
+            })
+        });
+        $scope.subjectList = subjectList;
         $scope.currentPage = 0;
         $scope.pageSize = 4;
         $scope.numberOfPages = function(){
@@ -36,6 +44,13 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
             refresh();
         }).error(function (err) {
             $rootScope.message = err.message;
+        })
+    };
+
+    $scope.createSubject = function(subj) {
+        $http.post('api/empl/' + DataService.getData() + '/subj/', subj).success(function() {
+            $rootScope.message = 'Подчиненный добавлен';
+            refresh();
         })
     };
 
@@ -59,7 +74,7 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
     };
     $scope.deleteEmployee = function(data) {
         $http.delete('api/empl/' + data._id).success(function() {
-            $rootScope.message = 'Сотрудник удален';
+            $rootScope.message = 'Подчиненный удален';
             refresh();
         }).error(function (err) {
             $rootScope.message = err.message;
@@ -68,6 +83,14 @@ mainApp.controller('employeesController', function($rootScope, $scope, $http, Au
     $scope.deleteTime = function(id, timeId) {
         $http.delete('api/empl/' + id + '/time/' + timeId).success(function() {
             $rootScope.message = 'Рабочее время удалено';
+            refresh();
+        }).error(function (err) {
+            $rootScope.message = err.message;
+        })
+    };
+    $scope.deleteSubj = function(id, subjId) {
+        $http.delete('api/empl/' + id + '/subj/' + subjId).success(function() {
+            $rootScope.message = 'Подчиненный удален';
             refresh();
         }).error(function (err) {
             $rootScope.message = err.message;

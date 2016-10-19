@@ -26,7 +26,8 @@ module.exports = {
                     start: req.body.start,
                     end: req.body.end
                 }
-            ]
+            ],
+            subjects: []
         });
         employee.save((err) => {
             if (!err) {
@@ -123,7 +124,7 @@ module.exports = {
             if (!employee) {
                 res.send(404, {message: 'Empl not found'})
             }
-            if (!employee.times.id((req.params.timeId))) {
+            if (!employee.times.id(req.params.timeId)) {
                 res.send(404, {message: 'Time not found'})
             } else {
                 employee.times.id(req.params.timeId).remove();
@@ -136,5 +137,46 @@ module.exports = {
                 })
             }
         });
-    }
+    },
+    addSubject(req, res) {
+        Employee.findById(req.params.id, (err, employee) => {
+            if (!employee) {
+                res.send(404, {message: 'Not found'})
+            }
+            let subject = {
+                subjId: req.body.subjId,
+                surname: req.body.surname
+            };
+            if (!employee['subjects']){
+                employee.subjects = []
+            }
+            employee.subjects.push(subject);
+            employee.save((err) => {
+                if (!err) {
+                    res.send({message: 'Subject added'})
+                } else {
+                    res.send(500, {message: 'Server error'})
+                }
+            })
+        });
+    },
+    deleteSubject(req, res) {
+        Employee.findById(req.params.id, (err, employee) => {
+            if (!employee) {
+                res.send(404, {message: 'Empl not found'})
+            }
+            if (!employee.subjects.id(req.params.subjId)) {
+                res.send(404, {message: 'Subject not found'})
+            } else {
+                employee.subjects.id(req.params.subjId).remove();
+                employee.save((err) => {
+                    if (!err) {
+                        res.send({message: 'Subject deleted'})
+                    } else {
+                        res.send(500, {message: 'Server error'})
+                    }
+                })
+            }
+        });
+    },
 };

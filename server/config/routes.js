@@ -15,15 +15,17 @@ module.exports = (app, passport) => {
     app.all('/api/*', bearerMiddleware);
 
     app.get('/api/empl/', emplController.read);
+
     app.post('/api/empl/', emplController.create);
     app.post('/api/empl/:id/time/', emplController.addTime);
+    app.post('/api/empl/:id/subj/', emplController.addSubject);
+
     app.put('/api/empl/:id', emplController.updateEmpl);
     app.put('/api/empl/:id/time/:timeId', emplController.updateTime);
+
     app.delete('/api/empl/:id', emplController.delete);
     app.delete('/api/empl/:id/time/:timeId', emplController.deleteTime);
-
-    app.post('/api/empl/:id/time/', emplController.addTime);
-    app.delete('/api/empl/:id/time/:timeId', emplController.deleteTime);
+    app.delete('/api/empl/:id/subj/:subjId', emplController.deleteSubject);
 
 
 };

@@ -3,7 +3,6 @@ mainApp.factory('tokenInjector', ['AuthService', function(AuthService) {
         request: function(config) {
             if (AuthService.isAuth()){
                 config.headers['Authorization'] = 'Bearer ' + AuthService.getToken();
-                console.log(config);
             }
             return config;
         }

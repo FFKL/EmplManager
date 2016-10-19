@@ -13,6 +13,7 @@
             <td>Пол</td>
             <td>Контакты</td>
             <td>Рабочий день/Приход/уход</td>
+            <td>Подчиненные</td>
             <td></td>
             <td></td>
         </tr>
@@ -26,6 +27,12 @@
                 <button type="button" class="btn btn-default" ng-click="$ctrl.openTimeWindow(empl._id)">Добавить</button>
                 <p ng-repeat="time in empl.times">{{time.day|formatDay}} / {{time.start|formatStartEndTime}} / {{time.end|formatStartEndTime}}
                 <button type="button" class="btn btn-default" ng-click="deleteTime(empl._id, time._id)">У</button>
+                </p>
+            </td>
+            <td>
+                <button type="button" class="btn btn-default" ng-click="$ctrl.openSubjWindow(empl._id)">Добавить</button>
+                <p ng-repeat="subj in empl.subjects">{{subj.surname}}
+                    <button type="button" class="btn btn-default" ng-click="deleteSubj(empl._id, subj._id)">У</button>
                 </p>
             </td>
             <td><button type="button" class="btn btn-default" ng-click="$ctrl.openEmplWindow(empl)">Редактировать</button></td>

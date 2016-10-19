@@ -1,0 +1,17 @@
+<script type="text/ng-template" id="addSubjWindow.html">
+    <div class="modal-header">
+        Добавить подчиненного
+    </div>
+    <form name="addSubjForm">
+        <div class="modal-body" id="modal-body">
+            <div class="form-group">
+                <select ng-model="subj" class="form-control" ng-options="item.surname for item in subjectList track by item.subjId" required>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-disabled="addSubjForm.$invalid" ng-click="createSubject(subj); $ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </form>
+</script>
